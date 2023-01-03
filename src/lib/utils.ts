@@ -23,6 +23,18 @@ export function toDataSource(parsed) {
   return { ...sampleData, dataSource };
 }
 
+export function getLineValues(data) {
+  return {
+    ...data,
+    dataSource: {
+      categories: data.dataSource.categories,
+      series: data.dataSource.series.map((s) => {
+        return { ...s, type: 'line' };
+      }),
+    },
+  };
+}
+
 export function getPieValues(data) {
   return {
     ...data,

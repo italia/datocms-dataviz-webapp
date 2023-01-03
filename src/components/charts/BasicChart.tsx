@@ -9,6 +9,15 @@ function BasicChart({ data }: ChartPropsType) {
   const axis =
     data.config.direction === 'vertical'
       ? {
+          dataZoom: [
+            {
+              show: true,
+              realtime: true,
+              start: 0,
+              end: 100,
+              xAxisIndex: [0, 1],
+            },
+          ],
           xAxis: {
             type: 'category',
             data: data.dataSource.categories,
