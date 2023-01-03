@@ -44,15 +44,15 @@ function App() {
         />
         <div className="w-full border-2 px-4  overflow-y-scroll bg-white min-h-scr">
           {data && data[0] && (
-            <div className="bg-grey-300">
+            <div className="bg-gray-50">
               <hr />
-              <div className="my-10 bg-gray-50 shadow-lg  w-full text-center">
+              <div className="m-5 bg-white shadow-lg  w-full text-center">
                 <center>
                   <RenderChart chart={chart} data={data} options={options} />
                 </center>
               </div>
               <hr />
-              <div className="my-10 bg-gray-50 shadow-lg overflow-auto text-center ">
+              <div className="m-5 bg-white shadow-lg overflow-auto text-center ">
                 <h1 className="title">Data</h1>
                 <center>
                   <DataTable data={data} reset={reset} transpose={transpose} />

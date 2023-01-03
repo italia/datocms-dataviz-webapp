@@ -4,7 +4,7 @@ import SelectChart from './SelectChart';
 
 function Nav({ data, send, setData, state, chart, setChart }) {
   const navItem =
-    'py-2 px-4 bg-blue-500 text-white font-semibold shadow-md hover: bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75';
+    'py-2 px-4 bg-blue-500 text-white font-semibold shadow-md hover: bg-blue-700  focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75';
 
   const navItemActive = 'py-2 px-4 bg-white text-black font-semibold shadow-md';
 

@@ -16,6 +16,7 @@ function BasicChart({ data }: ChartPropsType) {
               start: 0,
               end: 100,
               xAxisIndex: [0, 1],
+              // type: 'inside',
             },
           ],
           xAxis: {

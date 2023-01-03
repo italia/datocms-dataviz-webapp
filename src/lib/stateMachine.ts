@@ -2,7 +2,7 @@ import { createMachine } from 'xstate';
 
 const stateMachine = createMachine(
   {
-    initial: 'idle',
+    initial: 'upload',
     context: {
       data: '',
     },
