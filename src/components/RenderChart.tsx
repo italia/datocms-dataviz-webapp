@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 import BasicChart from './charts/BasicChart';
 import PieChart from './charts/PieChart';
-import { toDataSource, getPieValues, getLineValues } from '../lib/utils';
+import {
+  toDataSource,
+  getPieValues,
+  getLineValues,
+  getBarValues,
+} from '../lib/utils';
 
 function RenderChart({ chart, data, options }) {
   function transformData(data) {
@@ -25,7 +30,7 @@ function RenderChart({ chart, data, options }) {
     <div className="w-full min-height-[800px]">
       {currentValue?.dataSource && (
         <div>
-          {chart === 'bar' && <BasicChart data={currentValue} />}
+          {chart === 'bar' && <BasicChart data={getBarValues(currentValue)} />}
           {chart === 'line' && (
             <BasicChart data={getLineValues(currentValue)} />
           )}

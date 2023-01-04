@@ -17,9 +17,12 @@ function App() {
     setData(null);
   }
   function transpose() {
+    setData(null);
     const transposed = transposeData(data);
     setChart('');
-    handleChangeData(transposed);
+    setTimeout(() => {
+      handleChangeData(transposed);
+    }, 300);
   }
 
   function handleChangeData(d) {

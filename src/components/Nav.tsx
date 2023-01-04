@@ -1,6 +1,7 @@
 import { Button } from 'datocms-react-ui';
 import CSVUpload from './CSVUpload';
 import SelectChart from './SelectChart';
+import GenerateRandomData from './GenerateRandomData';
 
 function Nav({ data, send, setData, state, chart, setChart }) {
   const navItem =
@@ -11,24 +12,22 @@ function Nav({ data, send, setData, state, chart, setChart }) {
   const value = state.value as string;
   return (
     <div className="flex-none flex-col bg-gray-50 items-start justify-start">
-      {/*
-      <div>
+      <div className={value === 'generate' ? navItemActive : navItem}>
         <Button onClick={() => send('GEN')}>GENERATE DATA</Button>
         {state.matches('generate') && (
+          <div>
+            <GenerateRandomData setData={setData} />
+          </div>
+        )}
+      </div>
+      <div className={value === 'transform' ? navItemActive : navItem}>
+        <Button onClick={() => send('TRANSFORM')}>TRANSFORM SOURCE</Button>
+        {state.matches('transform') && (
           <div>
             <h1 className="title">Generate Data</h1>
           </div>
         )}
       </div>
-      <div>
-        <Button onClick={() => send('TRANSFORM')}>TRANSFORM SOURCE</Button>
-        {state.matches('transform') && (
-        <div>
-          <h1 className="title">Generate Data</h1>
-          </div>
-        )}
-      </div>
-        */}
       <div className={value === 'upload' ? navItemActive : navItem}>
         <Button onClick={() => send('UPLOAD')}>UPLOAD DATA</Button>
         {state.matches('upload') && (
