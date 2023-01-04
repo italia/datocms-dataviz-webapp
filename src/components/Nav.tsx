@@ -2,6 +2,7 @@ import { Button } from 'datocms-react-ui';
 import CSVUpload from './CSVUpload';
 import SelectChart from './SelectChart';
 import GenerateRandomData from './GenerateRandomData';
+import ChartOptions from './ChartOptions';
 
 function Nav({ data, send, setData, state, chart, setChart }) {
   const navItem =
@@ -46,7 +47,11 @@ function Nav({ data, send, setData, state, chart, setChart }) {
       </div>
       <div className={value === 'settings' ? navItemActive : navItem}>
         <Button onClick={() => send('SETTINGS')}>CHART OPTIONS</Button>
-        {state.matches('settings') && <div>TODO :(</div>}
+        {state.matches('settings') && (
+          <div>
+            <ChartOptions data={data} setData={setData} chart={chart} />
+          </div>
+        )}
       </div>
     </div>
   );
