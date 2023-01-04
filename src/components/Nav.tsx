@@ -20,14 +20,14 @@ function Nav({ data, send, setData, state, chart, setChart }) {
           </div>
         )}
       </div>
-      <div className={value === 'transform' ? navItemActive : navItem}>
+      {/* <div className={value === 'transform' ? navItemActive : navItem}>
         <Button onClick={() => send('TRANSFORM')}>TRANSFORM SOURCE</Button>
         {state.matches('transform') && (
           <div>
             <h1 className="title">Generate Data</h1>
           </div>
         )}
-      </div>
+      </div> */}
       <div className={value === 'upload' ? navItemActive : navItem}>
         <Button onClick={() => send('UPLOAD')}>UPLOAD DATA</Button>
         {state.matches('upload') && (
