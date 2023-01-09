@@ -3,7 +3,7 @@ import { Button } from 'datocms-react-ui';
 export default function DataTable({ data, reset, transpose }): JSX.Element {
   let max = 100;
   return (
-    <div>
+    <div className="text-xs">
       {data && data[0] && (
         <>
           <table style={{ border: '1px solid lightgray' }}>
@@ -45,20 +45,24 @@ export default function DataTable({ data, reset, transpose }): JSX.Element {
             </tbody>
           </table>
           <div className="my-4">
-            <span className="mx-2 border-2 p-2">
-              <Button
-                type="button"
-                onClick={() => transpose()}
-                buttonSize="xxs"
-              >
-                transpose
-              </Button>
-            </span>
-            <span className="mx-2 border-2 p-2">
-              <Button type="button" onClick={() => reset()} buttonSize="xxs">
-                Reset
-              </Button>
-            </span>
+            {transpose && (
+              <span className="mx-2 border-2 p-2">
+                <Button
+                  type="button"
+                  onClick={() => transpose()}
+                  buttonSize="xxs"
+                >
+                  transpose
+                </Button>
+              </span>
+            )}
+            {reset && (
+              <span className="mx-2 border-2 p-2">
+                <Button type="button" onClick={() => reset()} buttonSize="xxs">
+                  Reset
+                </Button>
+              </span>
+            )}
           </div>
         </>
       )}

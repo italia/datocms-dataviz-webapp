@@ -41,6 +41,18 @@ function ChartOptions({ data, setData, chart }) {
       chartType: ['pie'],
       span: 1,
     },
+    {
+      label: 'Smooth Lines',
+      name: 'smooth',
+      type: 'checkbox',
+      options: [],
+      required: false,
+      default: 'false',
+      placeholder: '',
+      description: '',
+      chartType: ['line'],
+      span: 1,
+    },
   ];
   function mapFields(values) {
     return fields.map((field) => {
@@ -64,13 +76,27 @@ function ChartOptions({ data, setData, chart }) {
                   <label>{field.label}</label>
                   <input
                     type={field.type}
-                    defaultValue={field.default}
+                    defaultValue={field.default as string}
                     {...register(field.name, { required: field.required })}
                   />
                   {errors[field.name] && <span>This field is required</span>}
                 </div>
               );
             } else if (['checkbox'].includes(field.type)) {
+              return (
+                <div className="flex flex-row" key={field.name}>
+                  <label>{field.label}</label>
+                  <div className="px-4">
+                    <input
+                      type="checkbox"
+                      defaultValue={field.default}
+                      {...register(field.name, { required: field.required })}
+                    />
+                  </div>
+                  {errors[field.name] && <span>This field is required</span>}
+                </div>
+              );
+            } else if (['select'].includes(field.type)) {
               return (
                 <div className="flex flex-row" key={field.name}>
                   <label>{field.label}</label>

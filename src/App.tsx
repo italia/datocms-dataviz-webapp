@@ -6,12 +6,14 @@ import stateMachine from './lib/stateMachine';
 import DataTable from './components/DataTable';
 import RenderChart from './components/RenderChart';
 import Nav from './components/Nav';
+import TransformSource from './components/TransformSource';
 
 function App() {
   const [state, send] = useMachine(stateMachine);
   const [data, setData] = useState(null);
   const [chart, setChart] = useState('');
   const [options, setOptions] = useState(null);
+  const [rawData, setRawData] = useState(null);
 
   function reset() {
     setData(null);
@@ -30,6 +32,7 @@ function App() {
     setData(d);
     send('CHOOSE');
   }
+  const stateValue = state.value as string;
 
   return (
     <div className="w-full bg-blue-600">
@@ -44,8 +47,15 @@ function App() {
           state={state}
           chart={chart}
           setChart={setChart}
+          setRawData={setRawData}
         />
         <div className="w-full border-2 px-4  overflow-y-scroll bg-white min-h-scr">
+          {stateValue === 'transform' && rawData && (
+            <div className="bg-gray-50 w-full">
+              <TransformSource setData={setData} rawData={rawData} />
+            </div>
+          )}
+
           {data && data[0] && (
             <div className="bg-gray-50">
               <hr />
