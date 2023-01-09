@@ -5,7 +5,17 @@ import GenerateRandomData from './GenerateRandomData';
 import ChartOptions from './ChartOptions';
 import LoadSource from './LoadSource';
 
-function Nav({ data, send, setData, state, chart, setChart, setRawData }) {
+function Nav({
+  data,
+  send,
+  setData,
+  state,
+  chart,
+  setChart,
+  setRawData,
+  config,
+  setConfig,
+}) {
   const navItem =
     'py-2 px-4 bg-blue-500 text-white font-semibold shadow-md hover: bg-blue-700  focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75';
 
@@ -50,7 +60,7 @@ function Nav({ data, send, setData, state, chart, setChart, setRawData }) {
         <Button onClick={() => send('SETTINGS')}>CHART OPTIONS</Button>
         {state.matches('settings') && (
           <div>
-            <ChartOptions data={data} setData={setData} chart={chart} />
+            <ChartOptions config={config} setConfig={setConfig} chart={chart} />
           </div>
         )}
       </div>

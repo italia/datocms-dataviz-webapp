@@ -19,13 +19,16 @@ function PieChart({ data }: ChartPropsType) {
       fontWeight: 'bold',
       fontSize: 12,
     },
-    tooltip: {},
+    tooltip: {
+      show: data.config.tooltip,
+    },
     legend: {
       left: 'center',
       top: 'top',
+      show: data.config.legend,
     },
     toolbox: {
-      show: true,
+      show: data.config.toolbox,
       left: 'right',
       top: 'top',
       feature: {

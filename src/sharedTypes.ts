@@ -10,9 +10,14 @@ export type FieldDataType = {
     direction: string;
     h: number;
     w: number;
-    kind: string;
-    serieKind: string;
+    // kind: string;
+    // serieKind: string;
     titles: string[];
+    smooth: boolean;
+    tooltip: boolean;
+    legend: boolean;
+    toolbox: boolean;
+    zoom: string;
   };
   dataSource: {
     categories: string[];

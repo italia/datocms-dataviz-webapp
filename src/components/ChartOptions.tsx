@@ -2,44 +2,75 @@ import { Button } from 'datocms-react-ui';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-function ChartOptions({ data, setData, chart }) {
+function ChartOptions({ config, setConfig, chart }) {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: config,
+  });
 
   const fields = [
     {
-      label: 'Chart Heigh',
-      name: 'height',
+      label: 'Chart Height',
+      name: 'h',
       type: 'number',
       options: [],
       otherProps: {
-        step: 100,
+        step: 10,
       },
       required: false,
-      default: 500,
-      placeholder: 'Chart Heigh',
-      description: '',
-      chartType: ['bar', 'line', 'pie'],
-      span: 1,
+      chartType: ['bar', 'line', 'pie', 'geo'],
     },
     {
       label: 'Chart Width',
-      name: 'width',
+      name: 'w',
       type: 'number',
       options: [],
       otherProps: {
-        step: 100,
+        step: 10,
       },
       required: false,
-      default: 500,
-      placeholder: '',
-      description: '',
-      chartType: ['pie'],
-      span: 1,
+      chartType: ['bar', 'line', 'pie', 'geo'],
+    },
+    {
+      label: 'Show Legend',
+      name: 'legend',
+      type: 'checkbox',
+      options: [],
+      required: false,
+      chartType: ['bar', 'line', 'pie', 'geo'],
+      otherProps: {},
+    },
+    {
+      label: 'Show tooltip',
+      name: 'tooltip',
+      type: 'checkbox',
+      options: [],
+      required: false,
+      chartType: ['bar', 'line', 'pie', 'geo'],
+      otherProps: {},
+    },
+    {
+      label: 'Data Zoom',
+      name: 'zoom',
+      type: 'select',
+      options: ['none', 'inside', 'slider'],
+      required: false,
+      chartType: ['bar', 'line', 'pie', 'geo'],
+      otherProps: {},
+    },
+    {
+      label: 'Direction',
+      name: 'direction',
+      type: 'select',
+      options: ['vertical', 'horizontal'],
+      otherProps: {},
+      required: false,
+      placeholder: 'Chart Direction',
+      chartType: ['bar', 'line'],
     },
     {
       label: 'Smooth Lines',
@@ -47,23 +78,17 @@ function ChartOptions({ data, setData, chart }) {
       type: 'checkbox',
       options: [],
       required: false,
-      default: 'false',
-      placeholder: '',
-      description: '',
       chartType: ['line'],
-      span: 1,
+      otherProps: {},
     },
   ];
-  function mapFields(values) {
-    return fields.map((field) => {
-      if (field.chartType.includes(chart)) {
-        return {
-          [field.name]: values[field.name] || field.default,
-        };
-      }
-    });
-  }
-  const onSubmit = (data) => console.log(data);
+
+  const onSubmit = (data) => {
+    console.log(data);
+    const { h, w, ...rest } = data;
+    setConfig({ h: Number(h), w: Number(w), ...rest });
+  };
+
   return (
     <div className="w-full my-10">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -76,8 +101,8 @@ function ChartOptions({ data, setData, chart }) {
                   <label>{field.label}</label>
                   <input
                     type={field.type}
-                    defaultValue={field.default as string}
                     {...register(field.name, { required: field.required })}
+                    {...field.otherProps}
                   />
                   {errors[field.name] && <span>This field is required</span>}
                 </div>
@@ -89,7 +114,6 @@ function ChartOptions({ data, setData, chart }) {
                   <div className="px-4">
                     <input
                       type="checkbox"
-                      defaultValue={field.default}
                       {...register(field.name, { required: field.required })}
                     />
                   </div>
@@ -101,13 +125,12 @@ function ChartOptions({ data, setData, chart }) {
                 <div className="flex flex-row" key={field.name}>
                   <label>{field.label}</label>
                   <select
-                    defaultValue={field.default}
                     {...register(field.name, { required: field.required })}
                   >
                     {field.options.map((option) => {
                       return (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
+                        <option key={option} value={option}>
+                          {option}
                         </option>
                       );
                     })}

@@ -7,12 +7,13 @@ import DataTable from './components/DataTable';
 import RenderChart from './components/RenderChart';
 import Nav from './components/Nav';
 import TransformSource from './components/TransformSource';
+import { sampleData } from './lib/constants';
 
 function App() {
   const [state, send] = useMachine(stateMachine);
   const [data, setData] = useState(null);
   const [chart, setChart] = useState('');
-  const [options, setOptions] = useState(null);
+  const [config, setConfig] = useState(null);
   const [rawData, setRawData] = useState(null);
 
   function reset() {
@@ -41,6 +42,7 @@ function App() {
       </div>
       <div className="flex w-full">
         <Nav
+          config={sampleData.config}
           data={data}
           send={send}
           setData={handleChangeData}
@@ -48,6 +50,7 @@ function App() {
           chart={chart}
           setChart={setChart}
           setRawData={setRawData}
+          setConfig={setConfig}
         />
         <div className="w-full border-2 px-4  overflow-y-scroll bg-white min-h-scr">
           {stateValue === 'transform' && rawData && (
@@ -61,7 +64,7 @@ function App() {
               <hr />
               <div className="m-5 bg-white shadow-lg  w-full text-center">
                 <center>
-                  <RenderChart chart={chart} data={data} options={options} />
+                  <RenderChart chart={chart} data={data} config={config} />
                 </center>
               </div>
               <hr />

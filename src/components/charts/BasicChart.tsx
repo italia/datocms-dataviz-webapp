@@ -11,12 +11,12 @@ function BasicChart({ data }: ChartPropsType) {
       ? {
           dataZoom: [
             {
-              show: true,
+              show: data.config.zoom !== 'none',
               realtime: true,
               start: 0,
               end: 100,
               xAxisIndex: [0, 1],
-              // type: 'inside',
+              type: data.config.zoom === 'slider' ? 'slider' : 'inside',
             },
           ],
           xAxis: {
@@ -28,6 +28,16 @@ function BasicChart({ data }: ChartPropsType) {
           },
         }
       : {
+          dataZoom: [
+            {
+              show: data.config.zoom !== 'none',
+              realtime: true,
+              start: 0,
+              end: 100,
+              yAxisIndex: [0, 1],
+              type: data.config.zoom === 'slider' ? 'slider' : 'inside',
+            },
+          ],
           yAxis: {
             type: 'category',
             data: data.dataSource.categories,
@@ -43,7 +53,7 @@ function BasicChart({ data }: ChartPropsType) {
     series: data.dataSource.series.map((serie) => {
       return {
         ...serie,
-        smooth: true,
+        smooth: data.config.smooth,
       };
     }),
     textStyle: {
@@ -56,13 +66,15 @@ function BasicChart({ data }: ChartPropsType) {
       // axisPointer: {
       //   type: 'cross',
       // },
+      show: data.config.tooltip,
     },
     legend: {
       left: 'center',
       top: 'top',
+      show: data.config.legend,
     },
     toolbox: {
-      show: true,
+      show: data.config.toolbox,
       left: 'right',
       top: 'top',
       feature: {

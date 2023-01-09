@@ -8,23 +8,20 @@ import {
   getBarValues,
 } from '../lib/utils';
 
-function RenderChart({ chart, data, options }) {
-  function transformData(data) {
-    if (!data) return null;
-    return toDataSource(data);
-    // d = d.dataSource.series.map((s) => {
-    //   s.type = chart === 'bar' ? 'bar' : 'line';
-    //   return s;
-    // });
-    // return d;
+function RenderChart({ chart, data, config = {} }) {
+  function transformData(d, cfg) {
+    if (!d) return null;
+    console.log('add config', cfg);
+    return toDataSource(d, cfg);
   }
-  const [currentValue, setCurrentValue] = useState(transformData(data));
+  const [currentValue, setCurrentValue] = useState(transformData(data, config));
+
   useEffect(() => {
-    console.log('CHANGE', chart);
-    if (chart && data) {
-      setCurrentValue(transformData(data));
+    console.log('CHANGE', chart, config);
+    if (chart && data && config) {
+      setCurrentValue(transformData(data, config));
     }
-  }, [chart, data]);
+  }, [chart, data, config]);
 
   return (
     <div className="w-full min-height-[800px]">

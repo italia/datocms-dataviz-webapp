@@ -4,7 +4,7 @@ export function transposeData(data) {
   return data[0].map((_, colIndex) => data.map((row) => row[colIndex]));
 }
 
-export function toDataSource(parsed) {
+export function toDataSource(parsed, config = {}) {
   const categories = parsed[0].slice(1) || [];
   const series = parsed.slice(1).map((row) => {
     const [name, ...data] = row;
@@ -18,9 +18,9 @@ export function toDataSource(parsed) {
     categories,
     series,
   };
-  console.log('dataSource', dataSource);
-
-  return { ...sampleData, dataSource };
+  // console.log('dataSource', dataSource);
+  const cfg = { config: { ...sampleData.config, ...config } };
+  return { ...sampleData, ...cfg, dataSource };
 }
 
 export function getBarValues(data) {
@@ -98,8 +98,6 @@ export function generateWords(words, length) {
   ).join(' ');
 }
 
-
-
 //return a letter of the alphabet
 export function getLetter(index) {
   return String.fromCharCode(65 + index);
@@ -109,7 +107,6 @@ export function getLetter(index) {
 export function generateCategories(length) {
   return Array.from({ length }, (_, index) => getLetter(getRandomInt(0, 25)));
 }
-
 
 export function generateItems(prefix, length) {
   return Array.from({ length }, (_, index) => `${prefix} ${index + 1}`);
