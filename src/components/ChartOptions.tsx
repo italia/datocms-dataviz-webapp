@@ -54,6 +54,15 @@ function ChartOptions({ config, setConfig, chart }) {
       otherProps: {},
     },
     {
+      label: 'Cross Pointer',
+      name: 'axisPointer',
+      type: 'select',
+      options: ['line', 'cross', 'shadow', 'none'],
+      required: false,
+      chartType: ['bar', 'line'],
+      otherProps: {},
+    },
+    {
       label: 'Data Zoom',
       name: 'zoom',
       type: 'select',

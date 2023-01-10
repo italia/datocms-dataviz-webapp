@@ -22,9 +22,20 @@ function BasicChart({ data }: ChartPropsType) {
           xAxis: {
             type: 'category',
             data: data.dataSource.categories,
+            axisTick: {
+              alignWithLabel: true,
+            },
+            axisLabel: {
+              rotate: 30,
+              inside: false,
+              // margin: 8,
+            },
           },
           yAxis: {
             type: 'value',
+            axisTick: {
+              alignWithLabel: true,
+            },
           },
         }
       : {
@@ -41,9 +52,20 @@ function BasicChart({ data }: ChartPropsType) {
           yAxis: {
             type: 'category',
             data: data.dataSource.categories,
+            axisTick: {
+              alignWithLabel: true,
+            },
           },
           xAxis: {
             type: 'value',
+            axisTick: {
+              alignWithLabel: true,
+            },
+            axisLabel: {
+              rotate: 90,
+              inside: true,
+              margin: 0,
+            },
           },
         };
 
@@ -57,15 +79,15 @@ function BasicChart({ data }: ChartPropsType) {
       };
     }),
     textStyle: {
-      //  fontFamily: 'Roboto Mono',
+      fontFamily: 'Titillium Web, sans-serif',
       fontWeight: 'bold',
       fontSize: 12,
     },
     tooltip: {
       // trigger: 'axis',
-      // axisPointer: {
-      //   type: 'cross',
-      // },
+      axisPointer: {
+        type: data.config.axisPointer,
+      },
       show: data.config.tooltip,
     },
     legend: {

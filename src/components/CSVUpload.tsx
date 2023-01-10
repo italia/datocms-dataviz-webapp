@@ -12,6 +12,20 @@ function UploadCSV({ setData }) {
       complete: (results) => {
         console.log('RESULTS DATA', results.data);
         setData(results.data);
+        // const data = results.data.map((row, i) => {
+        //   if (i === 0) {
+        //     return row;
+        //   } else {
+        //     return row.map((cell, index) => {
+        //       if (index === 0) {
+        //         return cell;
+        //       } else {
+        //         return Number(cell);
+        //       }
+        //     });
+        //   }
+        // });
+        // setData(data);
       },
     });
   }

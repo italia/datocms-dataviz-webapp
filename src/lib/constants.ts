@@ -14,6 +14,7 @@ export const sampleData: FieldDataType = {
     legend: true,
     toolbox: true,
     zoom: 'none',
+    axisPointer: 'line',
   },
   dataSource: {
     categories: ['Matcha Latte', 'Milk Tea', 'Cheese Cocoa', 'Walnut Brownie'],

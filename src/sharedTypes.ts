@@ -18,6 +18,7 @@ export type FieldDataType = {
     legend: boolean;
     toolbox: boolean;
     zoom: string;
+    axisPointer: string;
   };
   dataSource: {
     categories: string[];

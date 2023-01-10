@@ -15,9 +15,8 @@ function PieChart({ data }: ChartPropsType) {
     color: data.config.colors,
     series: data.dataSource.series,
     textStyle: {
-      //  fontFamily: 'Roboto Mono',
-      fontWeight: 'bold',
-      fontSize: 12,
+      fontWeight: '600',
+      fontSize: 14,
     },
     tooltip: {
       show: data.config.tooltip,
