@@ -106,10 +106,7 @@ function GenerateRandomData({ setData }) {
         />
       </div>
 
-      <Button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={() => generate()}
-      >
+      <Button className="btn" onClick={() => generate()}>
         generate
       </Button>
       {generated && (
@@ -117,10 +114,7 @@ function GenerateRandomData({ setData }) {
           <div className="w-[500px] overflow-scroll">
             <DataTable data={generated} reset={reset} transpose={transpose} />
           </div>
-          <Button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={() => setData(generated)}
-          >
+          <Button className="btn" onClick={() => setData(generated)}>
             Use generated data
           </Button>
         </div>

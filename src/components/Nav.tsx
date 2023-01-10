@@ -25,7 +25,7 @@ function Nav({
   return (
     <div className="flex-none flex-col bg-gray-50 items-start justify-start">
       <div className={value === 'generate' ? navItemActive : navItem}>
-        <Button onClick={() => send('GEN')}>GENERATE DATA</Button>
+        <Button onClick={() => send('GEN')}>1 - GENERATE DATA</Button>
         {state.matches('generate') && (
           <div>
             <GenerateRandomData setData={setData} />
@@ -33,7 +33,7 @@ function Nav({
         )}
       </div>
       <div className={value === 'transform' ? navItemActive : navItem}>
-        <Button onClick={() => send('TRANSFORM')}>TRANSFORM SOURCE</Button>
+        <Button onClick={() => send('TRANSFORM')}>1 - TRANSFORM SOURCE</Button>
         {state.matches('transform') && (
           <div>
             <LoadSource setRawData={setRawData} />
@@ -41,7 +41,7 @@ function Nav({
         )}
       </div>
       <div className={value === 'upload' ? navItemActive : navItem}>
-        <Button onClick={() => send('UPLOAD')}>UPLOAD DATA</Button>
+        <Button onClick={() => send('UPLOAD')}>1 - UPLOAD DATA</Button>
         {state.matches('upload') && (
           <div>
             <CSVUpload setData={(d) => setData(d)} />
@@ -49,7 +49,7 @@ function Nav({
         )}
       </div>
       <div className={value === 'choose' ? navItemActive : navItem}>
-        <Button onClick={() => send('CHOOSE')}>CHOOSE CHART</Button>
+        <Button onClick={() => send('CHOOSE')}>2 - CHOOSE CHART</Button>
         {state.matches('choose') && (
           <div>
             <SelectChart setChart={setChart} chart={chart} />
@@ -57,7 +57,7 @@ function Nav({
         )}
       </div>
       <div className={value === 'settings' ? navItemActive : navItem}>
-        <Button onClick={() => send('SETTINGS')}>CHART OPTIONS</Button>
+        <Button onClick={() => send('SETTINGS')}>3 - CHART OPTIONS</Button>
         {state.matches('settings') && (
           <div>
             <ChartOptions config={config} setConfig={setConfig} chart={chart} />

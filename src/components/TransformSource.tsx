@@ -2,23 +2,13 @@ import { Button, TextField } from 'datocms-react-ui';
 import { useState, useEffect } from 'react';
 import DataTable from './DataTable';
 import { useForm } from 'react-hook-form';
-import {
-  generateItems,
-  fillArray,
-  transposeData,
-  generateRandomData,
-} from '../lib/utils';
-import axios from 'axios';
+import { transposeData } from '../lib/utils';
 
 function TransformSource({ setData, rawData }) {
   const [keys, setKeys] = useState([]);
   const [selection, setSelection] = useState(null);
   const [table, setTable] = useState(null);
   const [preview, setPreview] = useState(null);
-  const [url, setUrl] = useState(
-    'https://raw.githubusercontent.com/teamdigitale/padigitale2026-opendata/main/data/candidature_altrienti_finanziate.json'
-  );
-
   const {
     register,
     handleSubmit,
@@ -37,6 +27,10 @@ function TransformSource({ setData, rawData }) {
       };
     });
 
+    // setSelection({
+    //   x: items.map((i) => i.x).sort(),
+    //   y: items.map((i) => i.y).sort(),
+    // });
     const xLabels = [...new Set(items.map((i) => i.x))].sort();
     console.log('x', xLabels, xLabels.length);
     const yLabels = [...new Set(items.map((i) => i.y))].sort();
@@ -55,6 +49,7 @@ function TransformSource({ setData, rawData }) {
       return [yv, ...row];
     });
     const matrix = [cols, ...rows];
+    // setTable(matrix);
     setData(matrix);
   };
 
@@ -69,19 +64,26 @@ function TransformSource({ setData, rawData }) {
     }
   }, [rawData]);
 
+  function transpose() {
+    setTable((prev) => transposeData(prev));
+  }
+
   return (
     <div className="w-full my-10">
+      <p className="text-xl">PREVIEW DATA</p>
       {!table && preview && (
         <DataTable data={preview} reset={null} transpose={null} />
       )}
       {table && (
         <div>
-          <DataTable data={table} reset={null} transpose={null} />
-          <Button
-            type="button"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Save data
+          <p className="text-xl">EXTRACTED DATA</p>
+          <DataTable
+            data={table}
+            reset={setTable(null)}
+            transpose={transpose}
+          />
+          <Button type="button" className="btn" onClick={setData(table)}>
+            Use this data
           </Button>
         </div>
       )}

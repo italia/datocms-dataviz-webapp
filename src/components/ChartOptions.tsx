@@ -97,7 +97,9 @@ function ChartOptions({ config, setConfig, chart }) {
     const { h, w, ...rest } = data;
     setConfig({ h: Number(h), w: Number(w), ...rest });
   };
-
+  if (!chart) {
+    return <div my-10>Please choose a chart type</div>;
+  }
   return (
     <div className="w-full my-10">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -106,7 +108,7 @@ function ChartOptions({ config, setConfig, chart }) {
           .map((field) => {
             if (['text', 'email', 'number'].includes(field.type)) {
               return (
-                <div className="flex flex-row" key={field.name}>
+                <div className="my-2 grid grid-cols-2 gap-2" key={field.name}>
                   <label>{field.label}</label>
                   <input
                     type={field.type}
@@ -118,7 +120,7 @@ function ChartOptions({ config, setConfig, chart }) {
               );
             } else if (['checkbox'].includes(field.type)) {
               return (
-                <div className="flex flex-row" key={field.name}>
+                <div className="my-2 grid grid-cols-2 gap-2" key={field.name}>
                   <label>{field.label}</label>
                   <div className="px-4">
                     <input
@@ -131,7 +133,7 @@ function ChartOptions({ config, setConfig, chart }) {
               );
             } else if (['select'].includes(field.type)) {
               return (
-                <div className="flex flex-row" key={field.name}>
+                <div className="my-2 grid grid-cols-2 gap-2" key={field.name}>
                   <label>{field.label}</label>
                   <select
                     {...register(field.name, { required: field.required })}
@@ -151,7 +153,9 @@ function ChartOptions({ config, setConfig, chart }) {
               return <div>{field.name}</div>;
             }
           })}
-        <input type="submit" value="Submit" />
+        <div className="my-2">
+          <input type="submit" value="Submit" className="btn" />
+        </div>
       </form>
     </div>
   );
