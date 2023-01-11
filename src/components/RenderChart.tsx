@@ -23,6 +23,18 @@ function RenderChart({ chart, data, config = {} }) {
     }
   }, [chart, data, config]);
 
+  if (currentValue) {
+    const formatted =
+      chart === 'bar'
+        ? getBarValues(currentValue)
+        : chart === 'line'
+        ? getLineValues(currentValue)
+        : chart === 'pie'
+        ? getPieValues(currentValue)
+        : null;
+
+    console.log('DATA', formatted);
+  }
   return (
     <div className="w-full min-height-[800px]">
       {currentValue?.dataSource && (
