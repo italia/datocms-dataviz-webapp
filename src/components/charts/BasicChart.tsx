@@ -1,5 +1,6 @@
 import ReactEcharts from 'echarts-for-react';
-import { FieldDataType } from 'sharedTypes';
+import { FieldDataType } from '../../sharedTypes';
+import { useEffect, useState } from 'react';
 
 type ChartPropsType = {
   data: FieldDataType;
@@ -106,7 +107,7 @@ function BasicChart({ data }: ChartPropsType) {
       },
     },
   };
-
+  console.log('basic chart color', options.color);
   return (
     <ReactEcharts
       option={options}

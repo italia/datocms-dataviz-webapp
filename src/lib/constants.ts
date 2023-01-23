@@ -1,9 +1,52 @@
 import type { FieldDataType } from 'sharedTypes';
+/*
+sample: ['#5c6f82', '#BFDFFF', '#207BD6', '#004D99', '#6AAAEB'],
+  blue: ['#4392E0', '#207AD5', '#0066CC', '#004D99', '#004080', '#003366'],
+*/
+export const palettes = {
+  divergente: [
+    '#003366',
+    '#004D99',
+    '#0066CC',
+    '#207AD5',
+    '#4392E0',
+    '#D65C70',
+    '#CC334D',
+    '#B32D43',
+    '#992639',
+    '#7A1F2E',
+  ],
+  divergente_bis: [
+    '#003366',
+    '#004D99',
+    '#0066CC',
+    '#207AD5',
+    '#4392E0',
+    '#D48D22',
+    '#CC7A00',
+    '#B36B00',
+    '#995C00',
+    '#804D00',
+  ],
+  categorica: [
+    '#004080',
+    '#992639',
+    '#077F7B',
+    '#207AD5',
+    '#CC7A00',
+    '#661A26',
+    '#09AFA9',
+    '#2F475E',
+    '#B32D43',
+    '#525252',
+  ],
+};
 
 export const sampleData: FieldDataType = {
   config: {
     titles: [],
-    colors: ['#5c6f82', '#BFDFFF', '#207BD6', '#004D99', '#6AAAEB'],
+    palette: 'categorica',
+    colors: palettes.categorica,
     direction: 'vertical',
     h: 500,
     w: 900,
@@ -17,7 +60,7 @@ export const sampleData: FieldDataType = {
     axisPointer: 'line',
   },
   dataSource: {
-    categories: ['Matcha Latte', 'Milk Tea', 'Cheese Cocoa', 'Walnut Brownie'],
+    categories: [],
     series: [
       {
         type: 'bar',

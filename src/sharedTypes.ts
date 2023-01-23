@@ -6,6 +6,7 @@ export type SerieType = {
 
 export type FieldDataType = {
   config: {
+    palette: string;
     colors: string[];
     direction: string;
     h: number;

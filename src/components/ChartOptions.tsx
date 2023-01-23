@@ -1,6 +1,6 @@
 import { Button } from 'datocms-react-ui';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { palettes } from '../lib/constants';
 
 function ChartOptions({ config, setConfig, chart }) {
   const {
@@ -13,6 +13,16 @@ function ChartOptions({ config, setConfig, chart }) {
   });
 
   const fields = [
+    {
+      label: 'Chart palette',
+      name: 'palette',
+      type: 'select',
+      options: Object.keys(palettes),
+      otherProps: {},
+      required: false,
+      chartType: ['bar', 'line', 'pie', 'geo'],
+      defaultValue: config.palette,
+    },
     {
       label: 'Chart Height',
       name: 'h',
@@ -94,8 +104,12 @@ function ChartOptions({ config, setConfig, chart }) {
 
   const onSubmit = (data) => {
     console.log(data);
-    const { h, w, ...rest } = data;
-    setConfig({ h: Number(h), w: Number(w), ...rest });
+    const { h, w, palette, ...rest } = data;
+    const colors = palettes[palette];
+    console.log(palette, 'colors', colors);
+    const newConfig = { h: Number(h), w: Number(w), ...rest, colors };
+    console.log('newConfig', newConfig);
+    setConfig(newConfig);
   };
   if (!chart) {
     return <div my-10>Please choose a chart type</div>;

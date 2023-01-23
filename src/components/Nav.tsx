@@ -23,7 +23,7 @@ function Nav({
 
   const value = state.value as string;
   return (
-    <div className="flex-none flex-col bg-gray-50 items-start justify-start">
+    <div className="flex-col bg-gray-50 items-start justify-start">
       <div className={value === 'generate' ? navItemActive : navItem}>
         <Button onClick={() => send('GEN')}>1 - GENERATE DATA</Button>
         {state.matches('generate') && (
@@ -32,14 +32,14 @@ function Nav({
           </div>
         )}
       </div>
-      <div className={value === 'transform' ? navItemActive : navItem}>
+      {/* <div className={value === 'transform' ? navItemActive : navItem}>
         <Button onClick={() => send('TRANSFORM')}>1 - TRANSFORM SOURCE</Button>
         {state.matches('transform') && (
           <div>
             <LoadSource setRawData={setRawData} />
           </div>
         )}
-      </div>
+      </div> */}
       <div className={value === 'upload' ? navItemActive : navItem}>
         <Button onClick={() => send('UPLOAD')}>1 - UPLOAD DATA</Button>
         {state.matches('upload') && (

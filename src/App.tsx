@@ -8,13 +8,18 @@ import RenderChart from './components/RenderChart';
 import Nav from './components/Nav';
 import TransformSource from './components/TransformSource';
 import { sampleData } from './lib/constants';
+import useStoreState from './lib/store';
 
 function App() {
   const [state, send] = useMachine(stateMachine);
-  const [data, setData] = useState(null);
-  const [chart, setChart] = useState('');
-  const [config, setConfig] = useState(null);
-  const [rawData, setRawData] = useState(null);
+  const config = useStoreState((state) => state.config);
+  const setConfig = useStoreState((state) => state.setConfig);
+  const chart = useStoreState((state) => state.chart);
+  const setChart = useStoreState((state) => state.setChart);
+  const data = useStoreState((state) => state.data);
+  const setData = useStoreState((state) => state.setData);
+  const rawData = useStoreState((state) => state.rawData);
+  const setRawData = useStoreState((state) => state.setRawData);
 
   function reset() {
     setData(null);
@@ -40,9 +45,9 @@ function App() {
       <div className="text-white uppercase">
         STATE: {state?.value as string}
       </div>
-      <div className="flex w-full">
+      <div className="w-full xl:flex  justify-center">
         <Nav
-          config={sampleData.config}
+          config={config || sampleData.config}
           data={data}
           send={send}
           setData={handleChangeData}
@@ -52,7 +57,7 @@ function App() {
           setRawData={setRawData}
           setConfig={setConfig}
         />
-        <div className="w-full border-2 px-4  overflow-y-scroll bg-white min-h-scr">
+        <div className="w-full border-2 overflow-y-scroll bg-white min-h-scr">
           {stateValue === 'transform' && rawData && (
             <div className="bg-gray-50 w-full">
               <TransformSource setData={setData} rawData={rawData} />
@@ -60,15 +65,15 @@ function App() {
           )}
 
           {data && data[0] && (
-            <div className="bg-gray-50">
+            <div className="w-full bg-gray-50">
               <hr />
-              <div className="m-5 bg-white shadow-lg  w-full text-center">
+              <div className="w-full bg-white xl:m-5 xl:shadow-lg">
                 <center>
                   <RenderChart chart={chart} data={data} config={config} />
                 </center>
               </div>
               <hr />
-              <div className="m-5 bg-white shadow-lg overflow-auto text-center ">
+              <div className="overflow-auto w-full bg-white xl:m-5 xl:shadow-lg">
                 <h1 className="title">Data</h1>
                 <center>
                   <DataTable data={data} reset={reset} transpose={transpose} />

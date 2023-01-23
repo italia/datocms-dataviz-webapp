@@ -11,13 +11,13 @@ import {
 function RenderChart({ chart, data, config = {} }) {
   function transformData(d, cfg) {
     if (!d) return null;
-    console.log('add config', cfg);
+    console.log('add config');
     return toDataSource(d, cfg);
   }
   const [currentValue, setCurrentValue] = useState(transformData(data, config));
 
   useEffect(() => {
-    console.log('CHANGE', chart, config);
+    console.log('CHANGE');
     if (chart && data && config) {
       setCurrentValue(transformData(data, config));
     }
@@ -38,13 +38,13 @@ function RenderChart({ chart, data, config = {} }) {
   return (
     <div className="w-full min-height-[800px]">
       {currentValue?.dataSource && (
-        <div>
+        <>
           {chart === 'bar' && <BasicChart data={getBarValues(currentValue)} />}
           {chart === 'line' && (
             <BasicChart data={getLineValues(currentValue)} />
           )}
           {chart === 'pie' && <PieChart data={getPieValues(currentValue)} />}
-        </div>
+        </>
       )}
     </div>
   );

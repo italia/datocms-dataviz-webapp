@@ -18,9 +18,10 @@ export function toDataSource(parsed, config = {}) {
     categories,
     series,
   };
-  // console.log('dataSource', dataSource);
   const cfg = { config: { ...sampleData.config, ...config } };
-  return { ...sampleData, ...cfg, dataSource };
+  const transformed = { ...sampleData, ...cfg, dataSource };
+  console.log('transformed', transformed);
+  return transformed;
 }
 
 export function getBarValues(data) {
