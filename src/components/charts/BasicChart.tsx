@@ -1,12 +1,14 @@
 import ReactEcharts from 'echarts-for-react';
 import { FieldDataType } from '../../sharedTypes';
-import { useEffect, useState } from 'react';
+import { useRef } from 'react';
+import { saveAs } from 'file-saver';
 
 type ChartPropsType = {
   data: FieldDataType;
 };
 
-function BasicChart({ data }: ChartPropsType) {
+function BasicChart({ data }: ChartPropsType, id: string) {
+  const refCanvas = useRef<ReactEcharts>();
   const axis =
     data.config.direction === 'vertical'
       ? {
@@ -71,6 +73,7 @@ function BasicChart({ data }: ChartPropsType) {
         };
 
   const options = {
+    backgroundColor: '#F2F7FC',
     color: data.config.colors,
     ...axis,
     series: data.dataSource.series.map((serie) => {
@@ -108,15 +111,35 @@ function BasicChart({ data }: ChartPropsType) {
     },
   };
   console.log('basic chart color', options.color);
+
+  async function downLoadImage(element: any, id: string) {
+    const echartInstance = element.getEchartsInstance();
+    console.log('echartInstance', echartInstance);
+    const base64DataUrl = echartInstance.getDataURL();
+
+    try {
+      const blob = await fetch(base64DataUrl).then((res) => res.blob());
+      console.log('blob', blob);
+      saveAs(blob, `chart-${'' + Date.now()}.png`);
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
   return (
-    <ReactEcharts
-      option={options}
-      style={{
-        width: data.config.w,
-        height: data.config.h,
-        maxWidth: '100%',
-      }}
-    />
+    <>
+      <ReactEcharts
+        option={options}
+        ref={refCanvas}
+        style={{
+          width: data.config.w,
+          height: data.config.h,
+          maxWidth: '100%',
+        }}
+      />
+      <button onClick={() => downLoadImage(refCanvas.current, id)}>
+        Download
+      </button>
+    </>
   );
 }
 
