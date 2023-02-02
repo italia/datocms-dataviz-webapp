@@ -1,4 +1,17 @@
-import { sampleData } from '../lib/constants';
+import { sampleData, palettes } from '../lib/constants';
+
+export function getAvailablePalettes(numSeries) {
+  const keys = Object.keys(palettes);
+  const availabelPalettes = [
+    ...keys.filter((k) => k.indexOf(`_${numSeries}_`) > -1),
+    ...keys.slice(0, 3),
+  ].sort();
+
+  return availabelPalettes;
+}
+export function getPalette(palette) {
+  return palettes[palette];
+}
 
 export function transposeData(data) {
   return data[0].map((_, colIndex) => data.map((row) => row[colIndex]));
@@ -20,7 +33,7 @@ export function toDataSource(parsed, config = {}) {
   };
   const cfg = { config: { ...sampleData.config, ...config } };
   const transformed = { ...sampleData, ...cfg, dataSource };
-  console.log('transformed', transformed);
+  // console.log('transformed', transformed);
   return transformed;
 }
 

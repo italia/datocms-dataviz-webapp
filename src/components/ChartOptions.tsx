@@ -1,27 +1,50 @@
 import { Button } from 'datocms-react-ui';
 import { useForm } from 'react-hook-form';
 import { palettes } from '../lib/constants';
+import { getAvailablePalettes } from '../lib/utils';
 
-function ChartOptions({ config, setConfig, chart }) {
+function ShowPalette({ palette }) {
+  return (
+    <div className="flex flex-wrap">
+      {palette.map((p, i) => (
+        <div
+          key={i}
+          className="w-4 h-4 m-1 rounded-full"
+          style={{ backgroundColor: p }}
+        ></div>
+      ))}
+    </div>
+  );
+}
+
+function ChartOptions({ config, setConfig, chart, numSeries }) {
+  const availabelPalettes = getAvailablePalettes(numSeries);
+  const defaultPalette = availabelPalettes[0];
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm({
-    defaultValues: config,
+    defaultValues: {
+      ...config,
+      palette: defaultPalette,
+    },
   });
+
+  const watchPalette = watch('palette', defaultPalette);
 
   const fields = [
     {
       label: 'Chart palette',
       name: 'palette',
       type: 'select',
-      options: Object.keys(palettes),
+      options: availabelPalettes,
       otherProps: {},
       required: false,
       chartType: ['bar', 'line', 'pie', 'geo'],
-      defaultValue: config.palette,
+      defaultValue: defaultPalette,
     },
     {
       label: 'Chart Height',
@@ -116,6 +139,8 @@ function ChartOptions({ config, setConfig, chart }) {
   }
   return (
     <div className="w-full my-10">
+      <div>NUMERO SERIE : {numSeries}</div>
+      {watchPalette && <ShowPalette palette={palettes[watchPalette]} />}
       <form onSubmit={handleSubmit(onSubmit)}>
         {fields
           .filter((field) => field.chartType.includes(chart))

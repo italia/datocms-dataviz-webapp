@@ -1,7 +1,7 @@
 import { useMachine } from '@xstate/react';
 import { useState, useEffect } from 'react';
 // import { Canvas, Button, SwitchField } from 'datocms-react-ui';
-import { transposeData } from './lib/utils';
+import { getAvailablePalettes, getPalette, transposeData } from './lib/utils';
 import stateMachine from './lib/stateMachine';
 import DataTable from './components/DataTable';
 import RenderChart from './components/RenderChart';
@@ -34,6 +34,13 @@ function App() {
   }
 
   function handleChangeData(d) {
+    if (!config.palette) {
+      const numSeries = d.length - 1;
+      let palette = getAvailablePalettes(numSeries)[0];
+      config.palette = palette;
+      config.colors = getPalette(palette);
+      setConfig(config);
+    }
     setChart('');
     setData(d);
     send('CHOOSE');

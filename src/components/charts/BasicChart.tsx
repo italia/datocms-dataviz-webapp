@@ -110,16 +110,16 @@ function BasicChart({ data }: ChartPropsType, id: string) {
       },
     },
   };
-  console.log('basic chart color', options.color);
+  // console.log('basic chart color', options.color);
 
   async function downLoadImage(element: any, id: string) {
     const echartInstance = element.getEchartsInstance();
-    console.log('echartInstance', echartInstance);
+    // console.log('echartInstance', echartInstance);
     const base64DataUrl = echartInstance.getDataURL();
 
     try {
       const blob = await fetch(base64DataUrl).then((res) => res.blob());
-      console.log('blob', blob);
+      // console.log('blob', blob);
       saveAs(blob, `chart-${'' + Date.now()}.png`);
     } catch (error) {
       console.log('error', error);

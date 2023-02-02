@@ -60,7 +60,12 @@ function Nav({
         <Button onClick={() => send('SETTINGS')}>3 - CHART OPTIONS</Button>
         {state.matches('settings') && (
           <div>
-            <ChartOptions config={config} setConfig={setConfig} chart={chart} />
+            <ChartOptions
+              config={config}
+              setConfig={setConfig}
+              chart={chart}
+              numSeries={data?.length - 1 || 0}
+            />
           </div>
         )}
       </div>
