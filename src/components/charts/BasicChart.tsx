@@ -99,16 +99,16 @@ function BasicChart({ data }: ChartPropsType, id: string) {
       top: 'top',
       show: data.config.legend,
     },
-    toolbox: {
-      show: data.config.toolbox,
-      left: 'right',
-      top: 'top',
-      feature: {
-        // dataView: {},
-        // restore: {},
-        saveAsImage: {},
-      },
-    },
+    // toolbox: {
+    //   show: data.config.toolbox,
+    //   left: 'right',
+    //   top: 'top',
+    //   feature: {
+    //     // dataView: {},
+    //     // restore: {},
+    //     saveAsImage: {},
+    //   },
+    // },
   };
   // console.log('basic chart color', options.color);
 

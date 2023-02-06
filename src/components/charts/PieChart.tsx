@@ -26,16 +26,16 @@ function PieChart({ data }: ChartPropsType) {
       top: 'top',
       show: data.config.legend,
     },
-    toolbox: {
-      show: data.config.toolbox,
-      left: 'right',
-      top: 'top',
-      feature: {
-        // dataView: {},
-        // restore: {},
-        saveAsImage: {},
-      },
-    },
+    // toolbox: {
+    //   show: data.config.toolbox,
+    //   left: 'right',
+    //   top: 'top',
+    //   feature: {
+    //     // dataView: {},
+    //     // restore: {},
+    //     saveAsImage: {},
+    //   },
+    // },
   };
   return (
     <ReactEcharts
