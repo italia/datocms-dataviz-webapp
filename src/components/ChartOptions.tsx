@@ -1,7 +1,7 @@
-import { Button } from 'datocms-react-ui';
-import { useForm } from 'react-hook-form';
-import { palettes } from '../lib/constants';
-import { getAvailablePalettes } from '../lib/utils';
+import { Button } from "datocms-react-ui";
+import { useForm } from "react-hook-form";
+import { palettes } from "../lib/constants";
+import { getAvailablePalettes } from "../lib/utils";
 
 function ShowPalette({ palette }) {
   return (
@@ -33,94 +33,94 @@ function ChartOptions({ config, setConfig, chart, numSeries }) {
     },
   });
 
-  const watchPalette = watch('palette', defaultPalette);
+  const watchPalette = watch("palette", defaultPalette);
 
   const fields = [
     {
-      label: 'Chart palette',
-      name: 'palette',
-      type: 'select',
+      label: "Chart palette",
+      name: "palette",
+      type: "select",
       options: availabelPalettes,
       otherProps: {},
       required: false,
-      chartType: ['bar', 'line', 'pie', 'geo'],
+      chartType: ["bar", "line", "pie", "geo"],
       defaultValue: defaultPalette,
     },
     {
-      label: 'Chart Height',
-      name: 'h',
-      type: 'number',
+      label: "Chart Height",
+      name: "h",
+      type: "number",
       options: [],
       otherProps: {
         step: 10,
       },
       required: false,
-      chartType: ['bar', 'line', 'pie', 'geo'],
+      chartType: ["bar", "line", "pie", "geo"],
     },
     {
-      label: 'Chart Width',
-      name: 'w',
-      type: 'number',
+      label: "Chart Width",
+      name: "w",
+      type: "number",
       options: [],
       otherProps: {
         step: 10,
       },
       required: false,
-      chartType: ['bar', 'line', 'pie', 'geo'],
+      chartType: ["bar", "line", "pie", "geo"],
     },
     {
-      label: 'Show Legend',
-      name: 'legend',
-      type: 'checkbox',
+      label: "Show Legend",
+      name: "legend",
+      type: "checkbox",
       options: [],
       required: false,
-      chartType: ['bar', 'line', 'pie', 'geo'],
+      chartType: ["bar", "line", "pie", "geo"],
       otherProps: {},
     },
     {
-      label: 'Show tooltip',
-      name: 'tooltip',
-      type: 'checkbox',
+      label: "Show tooltip",
+      name: "tooltip",
+      type: "checkbox",
       options: [],
       required: false,
-      chartType: ['bar', 'line', 'pie', 'geo'],
+      chartType: ["bar", "line", "pie", "geo"],
       otherProps: {},
     },
     {
-      label: 'Cross Pointer',
-      name: 'axisPointer',
-      type: 'select',
-      options: ['line', 'cross', 'shadow', 'none'],
+      label: "Cross Pointer",
+      name: "axisPointer",
+      type: "select",
+      options: ["line", "cross", "shadow", "none"],
       required: false,
-      chartType: ['bar', 'line'],
+      chartType: ["bar", "line"],
       otherProps: {},
     },
     {
-      label: 'Data Zoom',
-      name: 'zoom',
-      type: 'select',
-      options: ['none', 'inside', 'slider'],
+      label: "Data Zoom",
+      name: "zoom",
+      type: "select",
+      options: ["none", "inside", "slider"],
       required: false,
-      chartType: ['bar', 'line', 'pie', 'geo'],
+      chartType: ["bar", "line", "pie", "geo"],
       otherProps: {},
     },
     {
-      label: 'Direction',
-      name: 'direction',
-      type: 'select',
-      options: ['vertical', 'horizontal'],
+      label: "Direction",
+      name: "direction",
+      type: "select",
+      options: ["vertical", "horizontal"],
       otherProps: {},
       required: false,
-      placeholder: 'Chart Direction',
-      chartType: ['bar', 'line'],
+      placeholder: "Chart Direction",
+      chartType: ["bar", "line"],
     },
     {
-      label: 'Smooth Lines',
-      name: 'smooth',
-      type: 'checkbox',
+      label: "Smooth Lines",
+      name: "smooth",
+      type: "checkbox",
       options: [],
       required: false,
-      chartType: ['line'],
+      chartType: ["line"],
       otherProps: {},
     },
   ];
@@ -129,9 +129,9 @@ function ChartOptions({ config, setConfig, chart, numSeries }) {
     console.log(data);
     const { h, w, palette, ...rest } = data;
     const colors = palettes[palette];
-    console.log(palette, 'colors', colors);
+    console.log(palette, "colors", colors);
     const newConfig = { h: Number(h), w: Number(w), ...rest, colors };
-    console.log('newConfig', newConfig);
+    console.log("newConfig", newConfig);
     setConfig(newConfig);
   };
   if (!chart) {
@@ -139,13 +139,12 @@ function ChartOptions({ config, setConfig, chart, numSeries }) {
   }
   return (
     <div className="w-full my-10">
-      <div>NUMERO SERIE : {numSeries}</div>
       {watchPalette && <ShowPalette palette={palettes[watchPalette]} />}
       <form onSubmit={handleSubmit(onSubmit)}>
         {fields
           .filter((field) => field.chartType.includes(chart))
           .map((field) => {
-            if (['text', 'email', 'number'].includes(field.type)) {
+            if (["text", "email", "number"].includes(field.type)) {
               return (
                 <div className="my-2 grid grid-cols-2 gap-2" key={field.name}>
                   <label>{field.label}</label>
@@ -157,7 +156,7 @@ function ChartOptions({ config, setConfig, chart, numSeries }) {
                   {errors[field.name] && <span>This field is required</span>}
                 </div>
               );
-            } else if (['checkbox'].includes(field.type)) {
+            } else if (["checkbox"].includes(field.type)) {
               return (
                 <div className="my-2 grid grid-cols-2 gap-2" key={field.name}>
                   <label>{field.label}</label>
@@ -170,7 +169,7 @@ function ChartOptions({ config, setConfig, chart, numSeries }) {
                   {errors[field.name] && <span>This field is required</span>}
                 </div>
               );
-            } else if (['select'].includes(field.type)) {
+            } else if (["select"].includes(field.type)) {
               return (
                 <div className="my-2 grid grid-cols-2 gap-2" key={field.name}>
                   <label>{field.label}</label>

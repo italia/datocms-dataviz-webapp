@@ -1,6 +1,4 @@
-import { useState } from 'react';
-import { Canvas, Button, SwitchField } from 'datocms-react-ui';
-import Papa from 'papaparse';
+import Papa from "papaparse";
 
 function UploadCSV({ setData }) {
   function uploadFile(event) {
@@ -10,22 +8,7 @@ function UploadCSV({ setData }) {
       header: false,
       skipEmptyLines: true,
       complete: (results) => {
-        console.log('RESULTS DATA', results.data);
         setData(results.data);
-        // const data = results.data.map((row, i) => {
-        //   if (i === 0) {
-        //     return row;
-        //   } else {
-        //     return row.map((cell, index) => {
-        //       if (index === 0) {
-        //         return cell;
-        //       } else {
-        //         return Number(cell);
-        //       }
-        //     });
-        //   }
-        // });
-        // setData(data);
       },
     });
   }

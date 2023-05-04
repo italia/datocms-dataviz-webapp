@@ -1,7 +1,7 @@
-import ReactEcharts from 'echarts-for-react';
-import { FieldDataType } from '../../sharedTypes';
-import { useRef } from 'react';
-import { saveAs } from 'file-saver';
+import ReactEcharts from "echarts-for-react";
+import { FieldDataType } from "../../sharedTypes";
+import { useRef } from "react";
+import { saveAs } from "file-saver";
 
 type ChartPropsType = {
   data: FieldDataType;
@@ -10,20 +10,20 @@ type ChartPropsType = {
 function BasicChart({ data }: ChartPropsType, id: string) {
   const refCanvas = useRef<ReactEcharts>();
   const axis =
-    data.config.direction === 'vertical'
+    data.config.direction === "vertical"
       ? {
           dataZoom: [
             {
-              show: data.config.zoom !== 'none',
+              show: data.config.zoom !== "none",
               realtime: true,
               start: 0,
               end: 100,
               xAxisIndex: [0, 1],
-              type: data.config.zoom === 'slider' ? 'slider' : 'inside',
+              type: data.config.zoom === "slider" ? "slider" : "inside",
             },
           ],
           xAxis: {
-            type: 'category',
+            type: "category",
             data: data.dataSource.categories,
             axisTick: {
               alignWithLabel: true,
@@ -31,11 +31,10 @@ function BasicChart({ data }: ChartPropsType, id: string) {
             axisLabel: {
               rotate: 30,
               inside: false,
-              // margin: 8,
             },
           },
           yAxis: {
-            type: 'value',
+            type: "value",
             axisTick: {
               alignWithLabel: true,
             },
@@ -44,23 +43,23 @@ function BasicChart({ data }: ChartPropsType, id: string) {
       : {
           dataZoom: [
             {
-              show: data.config.zoom !== 'none',
+              show: data.config.zoom !== "none",
               realtime: true,
               start: 0,
               end: 100,
               yAxisIndex: [0, 1],
-              type: data.config.zoom === 'slider' ? 'slider' : 'inside',
+              type: data.config.zoom === "slider" ? "slider" : "inside",
             },
           ],
           yAxis: {
-            type: 'category',
+            type: "category",
             data: data.dataSource.categories,
             axisTick: {
               alignWithLabel: true,
             },
           },
           xAxis: {
-            type: 'value',
+            type: "value",
             axisTick: {
               alignWithLabel: true,
             },
@@ -73,7 +72,7 @@ function BasicChart({ data }: ChartPropsType, id: string) {
         };
 
   const options = {
-    backgroundColor: '#F2F7FC',
+    backgroundColor: "#F2F7FC",
     color: data.config.colors,
     ...axis,
     series: data.dataSource.series.map((serie) => {
@@ -83,20 +82,20 @@ function BasicChart({ data }: ChartPropsType, id: string) {
       };
     }),
     textStyle: {
-      fontFamily: 'Titillium Web, sans-serif',
-      fontWeight: 'bold',
+      fontFamily: "Titillium Web, sans-serif",
+      fontWeight: "bold",
       fontSize: 12,
     },
     tooltip: {
-      // trigger: 'axis',
+      trigger: "axis",
       axisPointer: {
         type: data.config.axisPointer,
       },
       show: data.config.tooltip,
     },
     legend: {
-      left: 'center',
-      top: 'top',
+      left: "center",
+      top: "top",
       show: data.config.legend,
     },
     // toolbox: {
@@ -110,19 +109,16 @@ function BasicChart({ data }: ChartPropsType, id: string) {
     //   },
     // },
   };
-  // console.log('basic chart color', options.color);
 
   async function downLoadImage(element: any, id: string) {
     const echartInstance = element.getEchartsInstance();
-    // console.log('echartInstance', echartInstance);
     const base64DataUrl = echartInstance.getDataURL();
 
     try {
       const blob = await fetch(base64DataUrl).then((res) => res.blob());
-      // console.log('blob', blob);
-      saveAs(blob, `chart-${'' + Date.now()}.png`);
+      saveAs(blob, `chart-${"" + Date.now()}.png`);
     } catch (error) {
-      console.log('error', error);
+      console.log("error", error);
     }
   }
   return (
@@ -133,7 +129,7 @@ function BasicChart({ data }: ChartPropsType, id: string) {
         style={{
           width: data.config.w,
           height: data.config.h,
-          maxWidth: '100%',
+          maxWidth: "100%",
         }}
       />
       <button onClick={() => downLoadImage(refCanvas.current, id)}>

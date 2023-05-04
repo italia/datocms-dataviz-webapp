@@ -1,12 +1,7 @@
-import { Button, TextField } from 'datocms-react-ui';
-import { useState } from 'react';
-import DataTable from './DataTable';
-import {
-  generateItems,
-  fillArray,
-  transposeData,
-  generateRandomData,
-} from '../lib/utils';
+import { Button } from "datocms-react-ui";
+import { useState } from "react";
+import DataTable from "./DataTable";
+import { generateItems, fillArray, transposeData } from "../lib/utils";
 
 function GenerateRandomData({ setData }) {
   const [rows, setRows] = useState(3);
@@ -18,8 +13,8 @@ function GenerateRandomData({ setData }) {
   const [generated, setGenerated] = useState(null);
 
   function generate() {
-    const rowLabels = generateItems('SERIE', rows);
-    const colLabels = ['_', ...generateItems('T', cols)];
+    const rowLabels = generateItems("SERIE", rows);
+    const colLabels = ["_", ...generateItems("T", cols)];
 
     let matrix = [];
     matrix[0] = colLabels;
@@ -30,7 +25,6 @@ function GenerateRandomData({ setData }) {
       ];
     }
     setGenerated(matrix);
-    // setData(matrix);
   }
 
   function reset() {

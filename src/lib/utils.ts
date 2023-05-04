@@ -1,4 +1,4 @@
-import { sampleData, palettes } from '../lib/constants';
+import { sampleData, palettes } from "../lib/constants";
 
 export function getAvailablePalettes(numSeries) {
   const keys = Object.keys(palettes);
@@ -22,7 +22,7 @@ export function toDataSource(parsed, config = {}) {
   const series = parsed.slice(1).map((row) => {
     const [name, ...data] = row;
     return {
-      type: 'bar',
+      type: "bar",
       name,
       data,
     };
@@ -33,7 +33,6 @@ export function toDataSource(parsed, config = {}) {
   };
   const cfg = { config: { ...sampleData.config, ...config } };
   const transformed = { ...sampleData, ...cfg, dataSource };
-  // console.log('transformed', transformed);
   return transformed;
 }
 
@@ -43,7 +42,7 @@ export function getBarValues(data) {
     dataSource: {
       categories: data.dataSource.categories,
       series: data.dataSource.series.map((s) => {
-        return { ...s, type: 'bar' };
+        return { ...s, type: "bar" };
       }),
     },
   };
@@ -55,7 +54,7 @@ export function getLineValues(data) {
     dataSource: {
       categories: data.dataSource.categories,
       series: data.dataSource.series.map((s) => {
-        return { ...s, type: 'line' };
+        return { ...s, type: "line" };
       }),
     },
   };
@@ -67,12 +66,12 @@ export function getPieValues(data) {
     dataSource: {
       categories: [],
       series: {
-        type: 'pie',
-        radius: ['50%', '85%'],
+        type: "pie",
+        radius: ["50%", "85%"],
         avoidLabelOverlap: false,
         label: {
           show: true,
-          position: 'inside',
+          position: "inside",
         },
         labelLine: {
           show: false,
@@ -105,11 +104,11 @@ export function generateRandomData(length, min, max) {
 
 // create a function to generate words from a string of words
 export function generateWords(words, length) {
-  const wordsArray = words.split(' ');
+  const wordsArray = words.split(" ");
   return Array.from(
     { length },
     () => wordsArray[getRandomInt(0, wordsArray.length - 1)]
-  ).join(' ');
+  ).join(" ");
 }
 
 //return a letter of the alphabet

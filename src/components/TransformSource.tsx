@@ -1,20 +1,14 @@
-import { Button, TextField } from 'datocms-react-ui';
-import { useState, useEffect } from 'react';
-import DataTable from './DataTable';
-import { useForm } from 'react-hook-form';
-import { transposeData } from '../lib/utils';
+import { Button } from "datocms-react-ui";
+import { useState, useEffect } from "react";
+import DataTable from "./DataTable";
+import { useForm } from "react-hook-form";
+import { transposeData } from "../lib/utils";
 
 function TransformSource({ setData, rawData }) {
   const [keys, setKeys] = useState([]);
-  const [selection, setSelection] = useState(null);
   const [table, setTable] = useState(null);
   const [preview, setPreview] = useState(null);
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     console.log(data);
 
@@ -27,16 +21,12 @@ function TransformSource({ setData, rawData }) {
       };
     });
 
-    // setSelection({
-    //   x: items.map((i) => i.x).sort(),
-    //   y: items.map((i) => i.y).sort(),
-    // });
     const xLabels = [...new Set(items.map((i) => i.x))].sort();
-    console.log('x', xLabels, xLabels.length);
+    console.log("x", xLabels, xLabels.length);
     const yLabels = [...new Set(items.map((i) => i.y))].sort();
-    console.log('y', yLabels, yLabels.length);
+    console.log("y", yLabels, yLabels.length);
 
-    let cols = ['_', ...xLabels];
+    let cols = ["_", ...xLabels];
     let rows = yLabels.map((yv) => {
       let row = xLabels.map((xv) => {
         return items
@@ -49,7 +39,6 @@ function TransformSource({ setData, rawData }) {
       return [yv, ...row];
     });
     const matrix = [cols, ...rows];
-    // setTable(matrix);
     setData(matrix);
   };
 
@@ -91,7 +80,7 @@ function TransformSource({ setData, rawData }) {
         <div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <p>Value colum</p>
-            <select {...register('value', { required: true })}>
+            <select {...register("value", { required: true })}>
               {keys.map((k) => (
                 <option key={`value-${k}`} value={k}>
                   {k}
@@ -99,7 +88,7 @@ function TransformSource({ setData, rawData }) {
               ))}
             </select>
             <p>X column</p>
-            <select {...register('x', { required: true })}>
+            <select {...register("x", { required: true })}>
               {keys.map((k) => (
                 <option key={`x-${k}`} value={k}>
                   {k}
@@ -107,7 +96,7 @@ function TransformSource({ setData, rawData }) {
               ))}
             </select>
             <p>Y column</p>
-            <select {...register('y', { required: true })}>
+            <select {...register("y", { required: true })}>
               {keys.map((k) => (
                 <option key={`y-${k}`} value={k}>
                   {k}

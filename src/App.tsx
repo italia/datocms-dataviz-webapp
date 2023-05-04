@@ -1,14 +1,12 @@
-import { useMachine } from '@xstate/react';
-import { useState, useEffect } from 'react';
-// import { Canvas, Button, SwitchField } from 'datocms-react-ui';
-import { getAvailablePalettes, getPalette, transposeData } from './lib/utils';
-import stateMachine from './lib/stateMachine';
-import DataTable from './components/DataTable';
-import RenderChart from './components/RenderChart';
-import Nav from './components/Nav';
-import TransformSource from './components/TransformSource';
-import { sampleData } from './lib/constants';
-import useStoreState from './lib/store';
+import { useMachine } from "@xstate/react";
+import { getAvailablePalettes, getPalette, transposeData } from "./lib/utils";
+import stateMachine from "./lib/stateMachine";
+import DataTable from "./components/DataTable";
+import RenderChart from "./components/RenderChart";
+import Nav from "./components/Nav";
+import TransformSource from "./components/TransformSource";
+import { sampleData } from "./lib/constants";
+import useStoreState from "./lib/store";
 
 function App() {
   const [state, send] = useMachine(stateMachine);
@@ -27,7 +25,7 @@ function App() {
   function transpose() {
     setData(null);
     const transposed = transposeData(data);
-    setChart('');
+    setChart("");
     setTimeout(() => {
       handleChangeData(transposed);
     }, 300);
@@ -41,9 +39,9 @@ function App() {
       config.colors = getPalette(palette);
       setConfig(config);
     }
-    setChart('');
+    setChart("");
     setData(d);
-    send('CHOOSE');
+    send("CHOOSE");
   }
   const stateValue = state.value as string;
 
@@ -65,7 +63,7 @@ function App() {
           setConfig={setConfig}
         />
         <div className="w-full border-2 overflow-y-scroll bg-white min-h-scr">
-          {stateValue === 'transform' && rawData && (
+          {stateValue === "transform" && rawData && (
             <div className="bg-gray-50 w-full">
               <TransformSource setData={setData} rawData={rawData} />
             </div>
