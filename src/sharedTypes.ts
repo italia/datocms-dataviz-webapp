@@ -1,3 +1,6 @@
+
+
+
 export type SerieType = {
   name: string;
   data: number[];
