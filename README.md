@@ -1,4 +1,4 @@
-# Chart Web-app
+# Chart Web App
 
 This application allows you to upload a csv file and use it as a datasource for a series of graphs.
 
