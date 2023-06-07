@@ -1,24 +1,24 @@
 # Chart Web App
 
-This application allows you to upload a csv file and use it as a datasource for a series of graphs.
+This application allows you to upload a CSV file and use it as a data source for a series of graphs.
 
 ## Stack
 
-The stack is React + Typescript, and use Vite as bundler.
-I have used yarn as package manager
+The stack is React + Typescript and uses Vite as a bundler.
+I used Yarn as package manager
 
 ## Run locally
 
-The very forst time, you have to install dependencies
+The first time, you have to install the dependencies
 
 ```zsh
 yarn install
 ```
 
-Then you are ready to run with the command:
+So you're ready to run with the command:
 
 ```zsh
 yarn dev
 ```
 
-your app is running on port http://localhost:3000
+your app is running on port `http://localhost:3000`
